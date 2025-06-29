@@ -1,186 +1,230 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Galatasaray Maç Arşivi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #c8102e, #fcdd09);
       color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      background: #c8102e;
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #fcdd09;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
-    }
-
-    nav {
-      background: rgba(0,0,0,0.8);
-      padding: 1rem 1.5rem;
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
+      flex-direction: column;
+      overflow-x: hidden;
+    }header {
+  background: rgba(0,0,0,0.6);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  position: relative;
+  user-select: none;
+}
+header h1 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+  flex-grow: 1;
+}
 
-    nav a {
-      color: #fcdd09;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1rem;
-      transition: all 0.3s ease;
-    }
+.hamburger {
+  width: 30px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger div {
+  height: 4px;
+  background: #fcdd09;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger.active div:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active div:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active div:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
 
-    nav a:hover {
-      color: #fff;
-      text-shadow: 0 0 8px #fcdd09;
-    }
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  height: 100vh;
+  width: 250px;
+  background: rgba(0,0,0,0.85);
+  padding-top: 80px;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+  transform: translateX(-260px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  user-select: none;
+}
+nav.active {
+  transform: translateX(0);
+}
+nav a {
+  color: #fcdd09;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+nav a:hover,
+nav a:focus {
+  background: #fcdd09;
+  color: #c8102e;
+  outline: none;
+}
 
-    .stars-container {
-      text-align: center;
-      margin-top: 40px;
-    }
+main {
+  flex-grow: 1;
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+  transition: margin-left 0.3s ease;
+}
+main.sidebar-open {
+  margin-left: 250px;
+}
 
-    .stars-top {
-      font-size: 2.5rem;
-      color: #fcdd09;
-      text-shadow: 0 0 10px #fcdd09cc;
-      letter-spacing: 4px;
-    }
+section.category {
+  margin-bottom: 3rem;
+}
+section.category h2 {
+  font-weight: 600;
+  font-size: 1.7rem;
+  border-left: 6px solid #fcdd09;
+  padding-left: 0.8rem;
+  margin-bottom: 1.5rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+}
 
-    .below-stars-text {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 1.3rem;
-      color: #fcdd09;
-      text-shadow: 0 0 5px #0009;
-    }
+.matches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 1.8rem;
+}
 
-    main {
-      max-width: 900px;
-      margin: 50px auto 60px;
-      padding: 0 1.5rem;
-    }
+.match-card {
+  background: rgba(0,0,0,0.45);
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.match-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(252,221,9,0.8);
+}
 
-    .welcome-section {
-      background: rgba(0,0,0,0.5);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      line-height: 1.7;
-      font-size: 1.1rem;
-    }
+.match-title {
+  padding: 1rem 1.2rem 0.5rem;
+  font-weight: 600;
+  font-size: 1.15rem;
+  text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+}
 
-    .welcome-section h2 {
-      border-left: 6px solid #fcdd09;
-      padding-left: 1rem;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #fcdd09;
-    }
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+.video-container iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0 0 15px 15px;
+  box-shadow: inset 0 0 20px rgba(252,221,9,0.4);
+  transition: box-shadow 0.3s ease;
+}
+.match-card:hover iframe {
+  box-shadow: inset 0 0 30px rgba(252,221,9,0.8);
+}
 
-    .welcome-section ul {
-      padding-left: 1.5rem;
-      margin-top: 1rem;
-    }
+@media (max-width: 768px) {
+  main.sidebar-open {
+    margin-left: 0;
+  }
+  nav {
+    width: 200px;
+    padding-top: 70px;
+  }
+  .match-title {
+    font-size: 1rem;
+    padding: 0.8rem 1rem 0.3rem;
+  }
+}
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.4rem;
+  }
+  .hamburger {
+    width: 26px;
+    height: 20px;
+  }
+  .hamburger div {
+    height: 3px;
+  }
+  nav a {
+    font-size: 1rem;
+  }
+}
 
-    .welcome-section li {
-      margin-bottom: 0.8rem;
-    }
-
-    footer {
-      text-align: center;
-      margin: 4rem 0 2rem;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #fcdd09;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      .stars-top {
-        font-size: 2rem;
-      }
-
-      .below-stars-text {
-        font-size: 1.1rem;
-      }
-
-      .welcome-section {
-        font-size: 1rem;
-        padding: 1.5rem;
-      }
-
-      .welcome-section h2 {
-        font-size: 1.6rem;
-      }
-
-      nav a {
-        font-size: 1rem;
-      }
-
-      footer {
-        font-size: 1.1rem;
-      }
-    }
   </style>
 </head>
-<body>
-
-  <header>
-    <h1>Galatasaray Maç Arşivi</h1>
-  </header>
-
-  <nav>
-    <a href="#anasayfa">Ana Sayfa</a>
-    <a href="#lig">Lig Maçları</a>
-    <a href="#avrupa">Avrupa Maçları</a>
-    <a href="#nostalji">Nostaljik Maçlar</a>
-  </nav>
-
-  <div class="stars-container">
-    <div class="stars-top">★★★★★</div>
-    <div class="below-stars-text">Sonunda İyiler Mutlaka Kazanır!</div>
+<body><header>
+  <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" role="button" tabindex="0">
+    <div></div><div></div><div></div>
   </div>
+  <h1>Galatasaray Maç Arşivi</h1>
+</header><nav id="sidebar" aria-label="Site Kategorileri">
+  <a href="#anasayfa" tabindex="0">Ana Sayfa</a>
+  <a href="#lig" tabindex="0">Lig Maçları</a>
+  <a href="#avrupa" tabindex="0">Avrupa Maçları</a>
+  <a href="#nostalji" tabindex="0">Nostaljik Maçlar</a>
+</nav><main id="anasayfa">
+  <!-- Ana sayfa içeriği buraya eklenecek -->
+</main><script>
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('anasayfa');
 
-  <main id="anasayfa">
-    <section class="welcome-section">
-      <h2>Hoşgeldiniz!</h2>
-      <p>1905 yılında Ali Sami Yen ve arkadaşları tarafından kurulan Galatasaray Spor Kulübü, Türkiye'nin en köklü ve en başarılı kulüplerinden biridir.</p>
-      <p>Bu sitede Galatasaray'ın efsanevi maçlarını kategori kategori izleyebileceksiniz: Lig, Avrupa ve Nostaljik maçlar!</p>
-      <h2>Galatasaray’ın Başarıları</h2>
-      <ul>
-        <li>22 Süper Lig Şampiyonluğu</li>
-        <li>18 Türkiye Kupası</li>
-        <li>16 Süper Kupa</li>
-        <li>2000 UEFA Kupası Şampiyonluğu</li>
-        <li>2000 UEFA Süper Kupa Şampiyonluğu</li>
-      </ul>
-    </section>
-  </main>
+  function toggleSidebar() {
+    hamburger.classList.toggle('active');
+    sidebar.classList.toggle('active');
+    mainContent.classList.toggle('sidebar-open');
+  }
 
-  <footer>
-    Şampiyon Cimbom!
-  </footer>
+  hamburger.addEventListener('click', toggleSidebar);
 
-</body>
+  hamburger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleSidebar();
+    }
+  });
+</script></body>
 </html>
