@@ -1,433 +1,186 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Galatasaray Maç Arşivi</title>
-<style>
-  body {
-    margin:0; padding:0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #c8102e, #fcdd09);
-    color: #fff;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  /* En üstte sağda Şampiyon Cimbom */
-  .top-cimbom {
-    position: fixed;
-    top: 8px; right: 12px;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #fcdd09;
-    text-shadow: 1px 1px 5px #0008;
-    user-select: none;
-    z-index: 2000;
-  }
-  /* Yıldızlar ve alt yazı */
-  .stars-container {
-    text-align: center;
-    margin-top: 100px; /* Header sabit olduğu için biraz daha aşağı */
-    user-select: none;
-  }
-  .stars-top {
-    font-size: 2.5rem;
-    color: #fcdd09;
-    text-shadow: 0 0 10px #fcdd09cc;
-    letter-spacing: 4px;
-  }
-  .below-stars-text {
-    margin-top: 10px;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: #fcdd09;
-    text-shadow: 0 0 5px #0009;
-  }
-  header {
-    position: fixed;
-    top: 0;
-    left: 0; right: 0;
-    background: #c8102e; /* Opak, perde değil */
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.8);
-    z-index: 1500;
-    user-select: none;
-  }
-  header h1 {
-    font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: 4px;
-    color: #fcdd09;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-    margin: 0;
-  }
-  /* Sidebar */
-  nav#sidebar {
-    position: fixed;
-    top: 60px; /* Header yüksekliği kadar boşluk */
-    left: 0;
-    width: 250px;
-    height: calc(100vh - 60px);
-    background: rgba(0,0,0,0.9);
-    padding-top: 20px;
-    padding-left: 1rem;
-    transform: translateX(-260px);
-    transition: transform 0.3s ease;
-    z-index: 1400;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  nav#sidebar.active {
-    transform: translateX(0);
-  }
-  nav#sidebar a {
-    color: #fcdd09;
-    font-weight: 600;
-    font-size: 1.2rem;
-    text-decoration: none;
-    padding: 0.4rem 0.7rem;
-    border-radius: 5px;
-    user-select: none;
-  }
-  nav#sidebar a:hover,
-  nav#sidebar a:focus {
-    background: #fcdd09;
-    color: #c8102e;
-    outline: none;
-  }
-  /* Main content */
-  main {
-    max-width: 900px;
-    margin: 140px auto 40px; /* Header için boşluk */
-    padding: 0 1.5rem;
-    user-select: none;
-  }
-  /* Categories hidden by default */
-  section.category {
-    display: none;
-  }
-  section.category.active {
-    display: block;
-  }
-  section.category h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #fcdd09;
-    border-left: 6px solid #fcdd09;
-    padding-left: 1rem;
-    margin-bottom: 1rem;
-    user-select: text;
-  }
-  .matches {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 1.8rem;
-  }
-  .match-card {
-    background: rgba(0,0,0,0.45);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  .match-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(252,221,9,0.8);
-  }
-  .match-title {
-    padding: 1rem 1.2rem 0.6rem;
-    font-weight: 600;
-    font-size: 1.15rem;
-    user-select: text;
-  }
-  .video-container {
-    position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* 16:9 */
-  }
-  .video-container iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-  /* Welcome section */
-  .welcome-section {
-    background: rgba(0,0,0,0.55);
-    padding: 3rem 3rem 3rem 3rem;
-    border-radius: 20px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.7);
-    margin-bottom: 3rem;
-    line-height: 1.7;
-    color: #fff;
-    font-size: 1.18rem;
-    user-select: text;
-  }
-  .welcome-section h2 {
-    margin-bottom: 1rem;
-    border-left: 8px solid #fcdd09;
-    padding-left: 1.2rem;
-    font-weight: 700;
-    font-size: 2.4rem;
-  }
-  .welcome-section p {
-    margin-bottom: 1.3rem;
-  }
-  .trophies {
-    font-size: 1.2rem;
-    margin-top: 1.5rem;
-    padding-left: 1.3rem;
-    list-style-type: disc;
-  }
-  .trophies li {
-    margin-bottom: 1rem;
-    line-height: 1.5;
-  }
-  /* Hamburger icon */
-  #hamburger {
-    width: 28px;
-    height: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    position: fixed;
-    top: 15px;
-    left: 20px;
-    z-index: 1600;
-  }
-  #hamburger div {
-    height: 4px;
-    background: #fcdd09;
-    border-radius: 3px;
-    transition: 0.3s;
-  }
-  /* Close button */
-  #closeBtn {
-    position: fixed;
-    top: 15px;
-    left: 20px;
-    width: 28px;
-    height: 28px;
-    cursor: pointer;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1600;
-  }
-  #closeBtn div {
-    position: absolute;
-    width: 28px;
-    height: 4px;
-    background: #fcdd09;
-    border-radius: 3px;
-  }
-  #closeBtn div:first-child {
-    transform: rotate(45deg);
-  }
-  #closeBtn div:last-child {
-    transform: rotate(-45deg);
-  }
-  /* Responsive tweaks */
-  @media (max-width: 768px) {
-    main {
-      margin: 140px 1rem 40px;
-      max-width: 100%;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galatasaray Maç Arşivi</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #c8102e, #fcdd09);
+      color: #fff;
+      overflow-x: hidden;
     }
-    nav#sidebar {
-      width: 200px;
-      height: calc(100vh - 60px);
-      padding-left: 0.7rem;
+
+    header {
+      background: #c8102e;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.7);
     }
-    nav#sidebar a {
-      font-size: 1rem;
-      padding: 0.3rem 0.6rem;
-    }
-  }
-  @media (max-width: 480px) {
-    .stars-top {
+
+    header h1 {
+      margin: 0;
       font-size: 2rem;
-      letter-spacing: 2.5px;
+      font-weight: 700;
+      color: #fcdd09;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
     }
+
+    nav {
+      background: rgba(0,0,0,0.8);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #fcdd09;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #fcdd09;
+    }
+
+    .stars-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .stars-top {
+      font-size: 2.5rem;
+      color: #fcdd09;
+      text-shadow: 0 0 10px #fcdd09cc;
+      letter-spacing: 4px;
+    }
+
     .below-stars-text {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: #fcdd09;
+      text-shadow: 0 0 5px #0009;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 50px auto 60px;
+      padding: 0 1.5rem;
+    }
+
+    .welcome-section {
+      background: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+      line-height: 1.7;
       font-size: 1.1rem;
     }
-    header h1 {
-      font-size: 1.6rem;
+
+    .welcome-section h2 {
+      border-left: 6px solid #fcdd09;
+      padding-left: 1rem;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #fcdd09;
     }
-    #hamburger, #closeBtn {
-      top: 12px;
-      left: 12px;
-      width: 24px;
-      height: 18px;
+
+    .welcome-section ul {
+      padding-left: 1.5rem;
+      margin-top: 1rem;
     }
-    #hamburger div, #closeBtn div {
-      height: 3px;
+
+    .welcome-section li {
+      margin-bottom: 0.8rem;
     }
-  }
-</style>
+
+    footer {
+      text-align: center;
+      margin: 4rem 0 2rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #fcdd09;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .stars-top {
+        font-size: 2rem;
+      }
+
+      .below-stars-text {
+        font-size: 1.1rem;
+      }
+
+      .welcome-section {
+        font-size: 1rem;
+        padding: 1.5rem;
+      }
+
+      .welcome-section h2 {
+        font-size: 1.6rem;
+      }
+
+      nav a {
+        font-size: 1rem;
+      }
+
+      footer {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<div class="top-cimbom" aria-hidden="true">Şampiyon Cimbom!</div>
+  <header>
+    <h1>Galatasaray Maç Arşivi</h1>
+  </header>
 
-<div class="stars-container" aria-label="Yıldızlar ve slogan">
-  <div class="stars-top" aria-hidden="true">★★★★★</div>
-  <div class="below-stars-text">Sonunda İyiler Mutlaka Kazanır!</div>
-</div>
+  <nav>
+    <a href="#anasayfa">Ana Sayfa</a>
+    <a href="#lig">Lig Maçları</a>
+    <a href="#avrupa">Avrupa Maçları</a>
+    <a href="#nostalji">Nostaljik Maçlar</a>
+  </nav>
 
-<header>
-  <h1>Galatasaray Maç Arşivi</h1>
-</header>
+  <div class="stars-container">
+    <div class="stars-top">★★★★★</div>
+    <div class="below-stars-text">Sonunda İyiler Mutlaka Kazanır!</div>
+  </div>
 
-<div id="hamburger" aria-label="Menüyü aç" role="button" tabindex="0" aria-expanded="false">
-  <div></div><div></div><div></div>
-</div>
-<div id="closeBtn" aria-label="Menüyü kapat" role="button" tabindex="0" style="display:none;">
-  <div></div><div></div>
-</div>
+  <main id="anasayfa">
+    <section class="welcome-section">
+      <h2>Hoşgeldiniz!</h2>
+      <p>1905 yılında Ali Sami Yen ve arkadaşları tarafından kurulan Galatasaray Spor Kulübü, Türkiye'nin en köklü ve en başarılı kulüplerinden biridir.</p>
+      <p>Bu sitede Galatasaray'ın efsanevi maçlarını kategori kategori izleyebileceksiniz: Lig, Avrupa ve Nostaljik maçlar!</p>
+      <h2>Galatasaray’ın Başarıları</h2>
+      <ul>
+        <li>22 Süper Lig Şampiyonluğu</li>
+        <li>18 Türkiye Kupası</li>
+        <li>16 Süper Kupa</li>
+        <li>2000 UEFA Kupası Şampiyonluğu</li>
+        <li>2000 UEFA Süper Kupa Şampiyonluğu</li>
+      </ul>
+    </section>
+  </main>
 
-<nav id="sidebar" aria-label="Site Kategorileri">
-  <a href="#" data-cat="lig" tabindex="0" class="nav-link">Lig Maçları</a>
-  <a href="#" data-cat="avrupa" tabindex="0" class="nav-link">Avrupa Maçları</a>
-  <a href="#" data-cat="nostalji" tabindex="0" class="nav-link">Nostaljik Maçlar</a>
-</nav>
-
-<main id="mainContent" tabindex="0">
-  <section class="welcome-section" role="main" tabindex="0">
-    <h2>Hoşgeldiniz!</h2>
-    <p>1905 yılında kurulan Galatasaray Spor Kulübü, Türkiye'nin en köklü ve başarılı kulüplerinden biridir. Sarı-kırmızılılar, tarih boyunca pek çok yerel ve uluslararası başarıya imza atmıştır.</p>
-    <p>Bu platformda Galatasaray'ın en önemli maç özetlerini Lig, Avrupa ve Nostaljik karşılaşmalar kategorilerinde bulabilirsiniz. Ana sayfada ise kulübün tarihçesi ve başarıları hakkında detaylı bilgiler yer almaktadır.</p>
-    <p>Gelin, Galatasaray’ın efsanevi hikayesine birlikte göz atalım!</p>
-
-    <h2>Başarılar</h2>
-    <ul class="trophies" aria-label="Galatasaray'ın kazandığı kupalar ve başarılar listesi">
-      <li>22 Süper Lig Şampiyonluğu</li>
-      <li>18 Türkiye Kupası</li>
-      <li>16 Süper Kupa</li>
-      <li>1 UEFA Kupası (2000)</li>
-      <li>1 UEFA Süper Kupa (2000)</li>
-    </ul>
-  </section>
-
-  <section id="lig" class="category" tabindex="-1" aria-label="Lig Maçları">
-    <h2>Lig Maçları</h2>
-    <div class="matches">
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 6-2 Ç.Rizespor - 11 Temmuz 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/f7TVPv66wYQ" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">M.Başakşehir 0-7 Galatasaray - 14 Temmuz 2023</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/zxeJBYelG44" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Fenerbahçe 1-3 Galatasaray - 21 Eylül 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/hHgqXZ5AK_s" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="avrupa" class="category" tabindex="-1" aria-label="Avrupa Maçları">
-    <h2>Avrupa Maçları</h2>
-    <div class="matches">
-      <div class="match-card">
-        <h3 class="match-title">Malmö 2-2 Galatasaray - 12 Aralık 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/7a96N6odZY4" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 4-3 Elfsborg - 23 Ekim 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/EAqtlcPpLnw" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="nostalji" class="category" tabindex="-1" aria-label="Nostaljik Maçlar">
-    <h2>Nostaljik Maçlar</h2>
-    <div class="matches">
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 2-0 Dortmund</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/n8dcLOxhHhA" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 0-0 Manchester United</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/_Ye55On3n_Q" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const closeBtn = document.getElementById('closeBtn');
-  const sidebar = document.getElementById('sidebar');
-  const mainContent = document.getElementById('mainContent');
-  const navLinks = document.querySelectorAll('nav#sidebar a.nav-link');
-  const categories = document.querySelectorAll('section.category');
-  const welcome = document.querySelector('.welcome-section');
-
-  function openMenu() {
-    sidebar.classList.add('active');
-    hamburger.style.display = 'none';
-    closeBtn.style.display = 'flex';
-  }
-  function closeMenu() {
-    sidebar.classList.remove('active');
-    hamburger.style.display = 'flex';
-    closeBtn.style.display = 'none';
-  }
-
-  hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
-
-  hamburger.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openMenu();
-    }
-  });
-  closeBtn.addEventListener('keydown', e => {
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      closeMenu();
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const catId = link.getAttribute('data-cat');
-      closeMenu();
-      categories.forEach(cat => cat.classList.remove('active'));
-      welcome.style.display = 'none';
-      const showCat = document.getElementById(catId);
-      if(showCat) {
-        showCat.classList.add('active');
-        showCat.focus();
-      }
-    });
-  });
-</script>
+  <footer>
+    Şampiyon Cimbom!
+  </footer>
 
 </body>
 </html>
