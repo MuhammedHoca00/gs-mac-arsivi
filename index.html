@@ -18,27 +18,36 @@
     flex-direction: column;
     overflow-x: hidden;
   }
-  /* En üst yıldızlar ve yazılar */
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #0008;
-    padding: 0.6rem 1.2rem;
+  /* En üstte Şampiyon Cimbom (sağ üst köşede) */
+  .top-cimbom {
+    position: fixed;
+    top: 8px;
+    right: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fcdd09;
+    text-shadow: 1px 1px 5px #0009;
+    user-select: none;
+    z-index: 2000;
+  }
+  /* Yıldızlar ve altındaki yazı */
+  .stars-container {
+    text-align: center;
+    padding: 1rem 0 0.4rem 0;
     user-select: none;
   }
   .stars-top {
-    font-size: 1.8rem;
+    font-size: 2.1rem;
     color: #fcdd09;
-    text-shadow: 0 0 5px #fcdd09cc;
+    text-shadow: 0 0 7px #fcdd09cc;
+    letter-spacing: 3px;
   }
-  .top-text-left,
-  .top-text-right {
-    color: #fcdd09;
+  .below-stars-text {
+    margin-top: 0.35rem;
     font-weight: 600;
-    font-size: 1rem;
-    text-shadow: 0 0 3px #000a;
-    user-select: none;
+    font-size: 1.15rem;
+    color: #fcdd09;
+    text-shadow: 0 0 3px #0009;
   }
   /* HEADER */
   header {
@@ -325,11 +334,13 @@
 </head>
 <body>
 
-<!-- En üst yıldızlar ve yazılar -->
-<div class="top-bar" aria-label="Site üst bilgileri">
+<!-- En üst sağ köşeye şampiyon cimbom -->
+<div class="top-cimbom" aria-hidden="true">Şampiyon Cimbom!</div>
+
+<!-- Yıldızlar ve alt yazı -->
+<div class="stars-container" aria-label="Yıldızlar ve slogan">
   <div class="stars-top" aria-hidden="true">★★★★★</div>
-  <div class="top-text-left">Sonunda İyiler Mutlaka Kazanır!</div>
-  <div class="top-text-right">Şampiyon Cimbom!</div>
+  <div class="below-stars-text">Sonunda İyiler Mutlaka Kazanır!</div>
 </div>
 
 <header>
@@ -337,7 +348,7 @@
   <div class="hamburger" id="hamburger" aria-label="Menüyü aç" role="button" tabindex="0" aria-expanded="false">
     <div></div><div></div><div></div>
   </div>
-  <div class="close-btn" id="closeBtn" aria-label="Menüyü kapat" role="button" tabindex="0">
+  <div class="close-btn" id="closeBtn" aria-label="Menüyü kapat" role="button" tabindex="0" aria-expanded="true">
     <div></div><div></div>
   </div>
 </header>
@@ -430,18 +441,8 @@
 </main>
 
 <script>
-  // DOM elemanları
   const hamburger = document.getElementById('hamburger');
   const closeBtn = document.getElementById('closeBtn');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
   const navLinks = document.querySelectorAll('nav a.nav-link');
-  const categories = document.querySelectorAll('section.category');
-  const welcomeSection = document.querySelector('.welcome-section');
-
-  // Menü açma fonksiyonu
-  function openMenu() {
-    sidebar.classList.add('active');
-    hamburger.classList.add('active');
-    closeBtn.style.display = 'flex';
-    mainContent.classList.add('sidebar-open');
