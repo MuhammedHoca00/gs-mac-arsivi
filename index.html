@@ -18,42 +18,55 @@
       flex-direction: column;
       overflow-x: hidden;
     }
+
     /* HEADER */
     header {
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.7);
       padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      justify-content: space-between;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      user-select: none;
       position: relative;
-      z-index: 1100;
+      user-select: none;
+      z-index: 1200;
     }
     header h1 {
       font-weight: 700;
       font-size: 2rem;
       letter-spacing: 3px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-      flex-grow: 1;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
       user-select: none;
+      flex-grow: 1;
     }
-    /* HAMBURGER BUTONU */
-    .hamburger {
+
+    /* HAMBURGER & CLOSE BUTTON */
+    .hamburger, .close-btn {
       width: 30px;
       height: 22px;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      cursor: pointer;
-      z-index: 1200;
+      z-index: 1300;
+      user-select: none;
     }
-    .hamburger div {
+    .hamburger div, .close-btn div {
       height: 4px;
       background: #fcdd09;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
+    .hamburger div:nth-child(1), .close-btn div:nth-child(1) {
+      width: 100%;
+    }
+    .hamburger div:nth-child(2), .close-btn div:nth-child(2) {
+      width: 100%;
+    }
+    .hamburger div:nth-child(3), .close-btn div:nth-child(3) {
+      width: 100%;
+    }
+
     /* Hamburger animasyon */
     .hamburger.active div:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
@@ -64,13 +77,40 @@
     .hamburger.active div:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
+
+    /* Close Button: Çarpı şeklinde */
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      width: 28px;
+      height: 28px;
+      display: none;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+    }
+    .close-btn div {
+      position: absolute;
+      width: 28px;
+      height: 4px;
+      background: #fcdd09;
+      border-radius: 2px;
+    }
+    .close-btn div:first-child {
+      transform: rotate(45deg);
+    }
+    .close-btn div:last-child {
+      transform: rotate(-45deg);
+    }
+
     /* SIDEBAR MENU */
     nav {
       position: fixed;
       top: 0; left: 0;
       height: 100vh;
       width: 250px;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.9);
       padding-top: 80px;
       padding-left: 1rem;
       display: flex;
@@ -88,10 +128,10 @@
       color: #fcdd09;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       padding: 0.5rem 0.7rem;
       border-radius: 6px;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease;
     }
     nav a:hover,
     nav a:focus {
@@ -99,173 +139,149 @@
       color: #c8102e;
       outline: none;
     }
+
     /* MAIN CONTENT */
     main {
       flex-grow: 1;
-      max-width: 1100px;
-      margin: 2rem auto 3rem;
-      padding: 0 1rem;
+      max-width: 900px;
+      margin: 3rem auto 4rem;
+      padding: 0 1.5rem;
       transition: margin-left 0.3s ease;
+      user-select: none;
     }
     main.sidebar-open {
       margin-left: 250px;
     }
-    section.category {
-      margin-bottom: 3rem;
-    }
-    section.category h2 {
-      font-weight: 600;
-      font-size: 1.7rem;
-      border-left: 6px solid #fcdd09;
-      padding-left: 0.8rem;
-      margin-bottom: 1.5rem;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
-    }
-    .matches {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-      gap: 1.8rem;
-    }
-    .match-card {
-      background: rgba(0,0,0,0.45);
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .match-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(252,221,9,0.8);
-    }
-    .match-title {
-      padding: 1rem 1.2rem 0.5rem;
-      font-weight: 600;
-      font-size: 1.15rem;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-    }
-    .video-container {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-      height: 0;
-      overflow: hidden;
-    }
-    .video-container iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 0 0 15px 15px;
-      box-shadow: inset 0 0 20px rgba(252,221,9,0.4);
-      transition: box-shadow 0.3s ease;
-    }
-    .match-card:hover iframe {
-      box-shadow: inset 0 0 30px rgba(252,221,9,0.8);
-    }
+
     /* ANA SAYFA */
     .welcome-section {
-      background: rgba(0,0,0,0.5);
-      padding: 2.5rem 3rem;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.55);
+      padding: 3rem 3rem 3rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.7);
       margin-bottom: 3rem;
-      line-height: 1.75;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
+      line-height: 1.85;
+      color: #fff;
+      font-size: 1.16rem;
+      letter-spacing: 0.02em;
+      user-select: text;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Yaratıcı alt çizgi ve yıldız animasyonu */
+    .welcome-section::before {
+      content: "✦✦✦";
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+      color: #fcdd09cc;
+      animation: glow 2.5s ease-in-out infinite alternate;
       user-select: none;
     }
+    @keyframes glow {
+      0% {opacity: 0.3;}
+      100% {opacity: 1;}
+    }
     .welcome-section h2 {
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       margin-bottom: 1rem;
-      border-left: 6px solid #fcdd09;
-      padding-left: 1rem;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+      border-left: 8px solid #fcdd09;
+      padding-left: 1.2rem;
+      text-shadow: 2px 2px 7px rgba(0,0,0,0.8);
+      font-weight: 700;
+      user-select: text;
     }
     .welcome-section p {
-      font-size: 1.18rem;
-      margin-bottom: 1.3rem;
-      color: #fff;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
+      margin-bottom: 1.5rem;
+      text-shadow: 1px 1px 7px rgba(0,0,0,0.6);
     }
     .trophies {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      padding-left: 1.2rem;
+      font-size: 1.25rem;
+      margin-top: 1.5rem;
+      padding-left: 1.3rem;
+      list-style-type: disc;
+      color: #fff;
       user-select: text;
     }
     .trophies li {
-      margin-bottom: 0.9rem;
-      list-style-type: disc;
+      margin-bottom: 1rem;
+      line-height: 1.5;
     }
+
     /* Responsive tweaks */
     @media (max-width: 768px) {
       main.sidebar-open {
         margin-left: 0;
       }
       nav {
-        width: 200px;
+        width: 220px;
         padding-top: 70px;
       }
-      .match-title {
-        font-size: 1rem;
-        padding: 0.8rem 1rem 0.3rem;
+      nav a {
+        font-size: 1.1rem;
       }
       .welcome-section {
-        padding: 2rem;
+        padding: 2rem 2rem 2.5rem 2rem;
+        font-size: 1.05rem;
       }
       .welcome-section h2 {
         font-size: 2rem;
       }
       .trophies {
         font-size: 1.1rem;
+        padding-left: 1rem;
       }
     }
     @media (max-width: 480px) {
       header h1 {
         font-size: 1.5rem;
       }
-      .hamburger {
+      .hamburger, .close-btn {
         width: 26px;
         height: 20px;
       }
-      .hamburger div {
+      .hamburger div, .close-btn div {
         height: 3px;
       }
       nav a {
         font-size: 1rem;
       }
-      .welcome-section p {
+      .welcome-section {
         font-size: 1rem;
+        padding: 1.8rem 1.5rem 2rem 1.5rem;
       }
       .trophies {
         font-size: 1rem;
+        padding-left: 0.8rem;
       }
     }
+
   </style>
 </head>
 <body>
 
 <header>
-  <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" role="button" tabindex="0">
+  <h1>Galatasaray Maç Arşivi</h1>
+  <div class="hamburger" id="hamburger" aria-label="Menüyü aç" role="button" tabindex="0" aria-expanded="false">
     <div></div><div></div><div></div>
   </div>
-  <h1>Galatasaray Maç Arşivi</h1>
+  <div class="close-btn" id="closeBtn" aria-label="Menüyü kapat" role="button" tabindex="0" style="display:none;">
+    <div></div><div></div>
+  </div>
 </header>
 
 <nav id="sidebar" aria-label="Site Kategorileri">
-  <a href="#lig" tabindex="0">Lig Maçları</a>
-  <a href="#avrupa" tabindex="0">Avrupa Maçları</a>
-  <a href="#nostalji" tabindex="0">Nostaljik Maçlar</a>
+  <a href="#lig" tabindex="0" class="nav-link">Lig Maçları</a>
+  <a href="#avrupa" tabindex="0" class="nav-link">Avrupa Maçları</a>
+  <a href="#nostalji" tabindex="0" class="nav-link">Nostaljik Maçlar</a>
 </nav>
 
 <main id="mainContent">
-  <section class="welcome-section" role="main">
+  <section class="welcome-section" role="main" tabindex="0">
     <h2>Hoşgeldiniz!</h2>
     <p>1905 yılında kurulan Galatasaray Spor Kulübü, Türkiye'nin en köklü ve başarılı kulüplerinden biridir. Sarı-kırmızılılar, tarih boyunca pek çok yerel ve uluslararası başarıya imza atmıştır.</p>
-    <p>Bu platformda Galatasaray'ın en önemli maç özetlerini; Lig, Avrupa ve Nostaljik karşılaşmalar kategorilerinde bulabilirsiniz. Ana sayfada ise kulübün tarihçesi ve başarıları hakkında detaylı bilgiler yer almaktadır.</p>
+    <p>Bu platformda Galatasaray'ın en önemli maç özetlerini Lig, Avrupa ve Nostaljik karşılaşmalar kategorilerinde bulabilirsiniz. Ana sayfada ise kulübün tarihçesi ve başarıları hakkında detaylı bilgiler yer almaktadır.</p>
     <p>Gelin, Galatasaray’ın efsanevi hikayesine birlikte göz atalım!</p>
 
     <h2>Başarılar</h2>
@@ -279,7 +295,7 @@
   </section>
 
   <!-- Lig Maçları -->
-  <section id="lig" class="category" tabindex="-1">
+  <section id="lig" class="category" tabindex="-1" style="display:none;">
     <h2>Lig Maçları</h2>
     <div class="matches">
       <div class="match-card">
@@ -328,7 +344,7 @@
   </section>
 
   <!-- Avrupa Maçları -->
-  <section id="avrupa" class="category" tabindex="-1">
+  <section id="avrupa" class="category" tabindex="-1" style="display:none;">
     <h2>Avrupa Maçları</h2>
     <div class="matches">
       <div class="match-card">
@@ -353,7 +369,7 @@
   </section>
 
   <!-- Nostaljik Maçlar -->
-  <section id="nostalji" class="category" tabindex="-1">
+  <section id="nostalji" class="category" tabindex="-1" style="display:none;">
     <h2>Nostaljik Maçlar</h2>
     <div class="matches">
       <div class="match-card">
@@ -392,23 +408,29 @@
 
 <script>
   const hamburger = document.getElementById('hamburger');
+  const closeBtn = document.getElementById('closeBtn');
   const sidebar = document.getElementById('sidebar');
   const mainContent = document.getElementById('mainContent');
 
-  function toggleSidebar() {
-    hamburger.classList.toggle('active');
-    sidebar.classList.toggle('active');
-    mainContent.classList.toggle('sidebar-open');
+  // Menü açık mı kapalı mı state
+  let menuOpen = false;
+
+  function openMenu() {
+    hamburger.style.display = 'none';
+    closeBtn.style.display = 'flex';
+    sidebar.classList.add('active');
+    mainContent.classList.add('sidebar-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+    menuOpen = true;
+  }
+  function closeMenu() {
+    hamburger.style.display = 'flex';
+    closeBtn.style.display = 'none';
+    sidebar.classList.remove('active');
+    mainContent.classList.remove('sidebar-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    menuOpen = false;
   }
 
-  hamburger.addEventListener('click', toggleSidebar);
-  hamburger.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleSidebar();
-    }
-  });
-</script>
-
-</body>
-</html>
+  hamburger.addEventListener('click', openMenu);
+  closeBtn.add
