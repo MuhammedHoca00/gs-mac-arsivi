@@ -18,13 +18,26 @@
     flex-direction: column;
     overflow-x: hidden;
   }
-  /* Yıldızlar üstte */
+  /* En üst yıldızlar ve yazılar */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0008;
+    padding: 0.6rem 1.2rem;
+    user-select: none;
+  }
   .stars-top {
-    text-align: center;
-    padding: 0.8rem 0;
     font-size: 1.8rem;
     color: #fcdd09;
-    text-shadow: 0 0 5px #fcdd09aa;
+    text-shadow: 0 0 5px #fcdd09cc;
+  }
+  .top-text-left,
+  .top-text-right {
+    color: #fcdd09;
+    font-weight: 600;
+    font-size: 1rem;
+    text-shadow: 0 0 3px #000a;
     user-select: none;
   }
   /* HEADER */
@@ -47,7 +60,6 @@
     user-select: none;
     flex-grow: 1;
   }
-
   /* HAMBURGER & CLOSE BUTTON */
   .hamburger, .close-btn {
     width: 30px;
@@ -74,7 +86,6 @@
   .hamburger div:nth-child(3), .close-btn div:nth-child(3) {
     width: 100%;
   }
-
   /* Hamburger animasyon */
   .hamburger.active div:nth-child(1) {
     transform: rotate(45deg) translate(5px, 5px);
@@ -85,7 +96,6 @@
   .hamburger.active div:nth-child(3) {
     transform: rotate(-45deg) translate(5px, -5px);
   }
-
   /* Close Button: Çarpı şeklinde */
   .close-btn {
     position: absolute;
@@ -111,7 +121,6 @@
   .close-btn div:last-child {
     transform: rotate(-45deg);
   }
-
   /* SIDEBAR MENU */
   nav {
     position: fixed;
@@ -147,7 +156,6 @@
     color: #c8102e;
     outline: none;
   }
-
   /* MAIN CONTENT */
   main {
     flex-grow: 1;
@@ -161,7 +169,6 @@
   main.sidebar-open {
     margin-left: 250px;
   }
-
   /* ANA SAYFA */
   .welcome-section {
     background: rgba(0,0,0,0.55);
@@ -217,7 +224,6 @@
     margin-bottom: 1.2rem;
     line-height: 1.6;
   }
-
   /* KATEGORİLER (Başlangıçta gizli) */
   section.category {
     display: none;
@@ -268,7 +274,6 @@
     height: 100%;
     border: none;
   }
-
   /* Responsive tweaks */
   @media (max-width: 768px) {
     main.sidebar-open {
@@ -320,8 +325,12 @@
 </head>
 <body>
 
-<!-- En üstte 5 yıldız -->
-<div class="stars-top" aria-hidden="true">★★★★★</div>
+<!-- En üst yıldızlar ve yazılar -->
+<div class="top-bar" aria-label="Site üst bilgileri">
+  <div class="stars-top" aria-hidden="true">★★★★★</div>
+  <div class="top-text-left">Sonunda İyiler Mutlaka Kazanır!</div>
+  <div class="top-text-right">Şampiyon Cimbom!</div>
+</div>
 
 <header>
   <h1>Galatasaray Maç Arşivi</h1>
@@ -357,7 +366,7 @@
   </section>
 
   <!-- Lig Maçları -->
-  <section id="lig" class="category" tabindex="-1">
+  <section id="lig" class="category" tabindex="-1" aria-label="Lig Maçları">
     <h2>Lig Maçları</h2>
     <div class="matches">
       <div class="match-card">
@@ -378,35 +387,11 @@
           <iframe src="https://www.youtube.com/embed/hHgqXZ5AK_s" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="match-card">
-        <h3 class="match-title">Trabzonspor 1-5 Galatasaray - 3 Temmuz 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/xesCv2VVGbs" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Antalyaspor 0-3 Galatasaray - 12 Haziran 2025</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/IuPzs6_iOvc" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 3-0 Kayserispor - 18 Mayıs 2025</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/GsTG5M2xD-s" allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 2-1 Trabzonspor - 21 Temmuz 2023</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/YcqzYraIWjY" allowfullscreen></iframe>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Avrupa Maçları -->
-  <section id="avrupa" class="category" tabindex="-1">
+  <section id="avrupa" class="category" tabindex="-1" aria-label="Avrupa Maçları">
     <h2>Avrupa Maçları</h2>
     <div class="matches">
       <div class="match-card">
@@ -421,17 +406,11 @@
           <iframe src="https://www.youtube.com/embed/EAqtlcPpLnw" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="match-card">
-        <h3 class="match-title">Galatasaray 3-2 Tottenham - 7 Kasım 2024</h3>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/nkVosSA8gkg" allowfullscreen></iframe>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Nostaljik Maçlar -->
-  <section id="nostalji" class="category" tabindex="-1">
+  <section id="nostalji" class="category" tabindex="-1" aria-label="Nostaljik Maçlar">
     <h2>Nostaljik Maçlar</h2>
     <div class="matches">
       <div class="match-card">
@@ -446,5 +425,23 @@
           <iframe src="https://www.youtube.com/embed/_Ye55On3n_Q" allowfullscreen></iframe>
         </div>
       </div>
-      <div class="match-card">
-        <h3 class="match-title
+    </div>
+  </section>
+</main>
+
+<script>
+  // DOM elemanları
+  const hamburger = document.getElementById('hamburger');
+  const closeBtn = document.getElementById('closeBtn');
+  const sidebar = document.getElementById('sidebar');
+  const mainContent = document.getElementById('mainContent');
+  const navLinks = document.querySelectorAll('nav a.nav-link');
+  const categories = document.querySelectorAll('section.category');
+  const welcomeSection = document.querySelector('.welcome-section');
+
+  // Menü açma fonksiyonu
+  function openMenu() {
+    sidebar.classList.add('active');
+    hamburger.classList.add('active');
+    closeBtn.style.display = 'flex';
+    mainContent.classList.add('sidebar-open');
