@@ -18,8 +18,6 @@
       flex-direction: column;
       overflow-x: hidden;
     }
-
-    /* HEADER */
     header {
       background: rgba(0,0,0,0.7);
       padding: 1rem 1.5rem;
@@ -30,13 +28,11 @@
       position: relative;
       z-index: 1100;
     }
-
     .header-left {
       display: flex;
       align-items: center;
       gap: 0.8rem;
     }
-
     .stars {
       font-size: 1.6rem;
       color: #fcdd09;
@@ -60,7 +56,6 @@
       color: #f0e246;
       font-style: italic;
     }
-
     header h1 {
       font-weight: 600;
       font-size: 1.8rem;
@@ -70,7 +65,6 @@
       flex-grow: 1;
       text-align: center;
     }
-
     .hamburger {
       width: 30px;
       height: 22px;
@@ -95,8 +89,6 @@
     .hamburger.active div:nth-child(3) {
       transform: rotate(-45deg) translate(5px, -5px);
     }
-
-    /* SIDEBAR MENU */
     nav {
       position: fixed;
       top: 0; left: 0;
@@ -132,8 +124,6 @@
       color: #c8102e;
       outline: none;
     }
-
-    /* Close (X) Button inside Sidebar */
     #closeSidebar {
       position: absolute;
       top: 15px;
@@ -148,8 +138,6 @@
     #closeSidebar:hover {
       color: #c8102e;
     }
-
-    /* MAIN CONTENT */
     main {
       flex-grow: 1;
       max-width: 1100px;
@@ -161,8 +149,6 @@
     main.sidebar-open {
       margin-left: 250px;
     }
-
-    /* Ana Sayfa İçeriği */
     #anasayfa {
       max-width: 900px;
       margin: 0 auto;
@@ -185,7 +171,6 @@
       color: #fff;
       text-shadow: 1px 1px 5px rgba(0,0,0,0.6);
     }
-
     #anasayfa ul {
       margin-left: 1.3rem;
       margin-bottom: 2rem;
@@ -196,11 +181,9 @@
       margin-bottom: 0.5rem;
       font-weight: 600;
     }
-
-    /* CATEGORY SECTIONS */
     section.category {
       margin-bottom: 3rem;
-      display: none; /* default gizli */
+      display: none;
     }
     section.category.active {
       display: block;
@@ -213,13 +196,11 @@
       margin-bottom: 1.5rem;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
     }
-
     .matches {
       display: grid;
       grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
       gap: 1.8rem;
     }
-
     .match-card {
       background: rgba(0,0,0,0.45);
       border-radius: 15px;
@@ -233,18 +214,16 @@
       transform: translateY(-8px);
       box-shadow: 0 12px 28px rgba(252,221,9,0.8);
     }
-
     .match-title {
       padding: 1rem 1.2rem 0.5rem;
       font-weight: 600;
       font-size: 1.15rem;
       text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
     }
-
     .video-container {
       position: relative;
       width: 100%;
-      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
     }
@@ -261,8 +240,6 @@
     .match-card:hover iframe {
       box-shadow: inset 0 0 30px rgba(252,221,9,0.8);
     }
-
-    /* FOOTER */
     footer {
       text-align: center;
       padding: 1rem 0;
@@ -273,8 +250,6 @@
       user-select: none;
       letter-spacing: 1px;
     }
-
-    /* Responsive tweaks */
     @media (max-width: 768px) {
       main.sidebar-open {
         margin-left: 0;
@@ -325,9 +300,7 @@
       <div class="top-text">Sonunda İyiler Mutlaka Kazanır!</div>
     </div>
   </div>
-
   <h1>Galatasaray Maç Arşivi</h1>
-
   <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" role="button" tabindex="0">
     <div></div><div></div><div></div>
   </div>
@@ -342,7 +315,6 @@
 </nav>
 
 <main id="mainContent">
-  <!-- Ana Sayfa -->
   <section id="anasayfa" class="active">
     <h2>Hoşgeldin Cimbom Sevdalıları!</h2>
     <p>
@@ -366,7 +338,6 @@
     </p>
   </section>
 
-  <!-- Lig Maçları -->
   <section id="lig" class="category">
     <h2>Lig Maçları</h2>
     <div class="matches">
@@ -415,7 +386,6 @@
     </div>
   </section>
 
-  <!-- Avrupa Maçları -->
   <section id="avrupa" class="category">
     <h2>Avrupa Maçları</h2>
     <div class="matches">
@@ -440,7 +410,6 @@
     </div>
   </section>
 
-  <!-- Nostaljik Maçlar -->
   <section id="nostalji" class="category">
     <h2>Nostaljik Maçlar</h2>
     <div class="matches">
@@ -465,4 +434,17 @@
       <div class="match-card">
         <h3 class="match-title">Galatasaray 2-0 PSV</h3>
         <div class="video-container">
-          <iframe src
+          <iframe src="https://www.youtube.com/embed/j08vtSB1EdA" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Şampiyon Cimbom!
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar
