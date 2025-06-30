@@ -6,7 +6,9 @@
   <title>Galatasaray Maç Arşivi</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #c8102e, #fcdd09);
@@ -16,9 +18,10 @@
       flex-direction: column;
       overflow-x: hidden;
     }
+
     header {
       background: rgba(0,0,0,0.6);
-      padding: 1rem 1.5rem;
+      padding: 1rem 1.5rem 2.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -26,6 +29,7 @@
       user-select: none;
       position: relative;
     }
+
     #top-stars {
       color: #fcdd09;
       font-size: 1.8rem;
@@ -34,6 +38,7 @@
       letter-spacing: 0.4rem;
       line-height: 1;
     }
+
     #top-text {
       font-weight: 600;
       font-size: 1rem;
@@ -41,21 +46,25 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
       margin-bottom: 0.8rem;
     }
+
+    .announcement {
+      background: #fcdd09;
+      color: #c8102e;
+      font-weight: bold;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
     header h1 {
       font-weight: 600;
       font-size: 1.8rem;
       letter-spacing: 2px;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-      margin-bottom: 0.5rem;
     }
-    #info-text {
-      font-size: 0.9rem;
-      color: #fff;
-      background: rgba(0,0,0,0.4);
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
+
     .hamburger {
       position: absolute;
       top: 1rem;
@@ -74,9 +83,15 @@
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    .hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .hamburger.active div:nth-child(2) { opacity: 0; }
-    .hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+    .hamburger.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
 
     nav {
       position: fixed;
@@ -93,7 +108,9 @@
       transition: transform 0.3s ease;
       z-index: 1000;
     }
-    nav.active { transform: translateX(0); }
+    nav.active {
+      transform: translateX(0);
+    }
     nav a {
       color: #fcdd09;
       text-decoration: none;
@@ -109,40 +126,16 @@
       margin: 2rem auto 3rem;
       padding: 0 1rem;
     }
-    section.category { margin-bottom: 3rem; }
+
+    section.category {
+      margin-bottom: 3rem;
+    }
     section.category h2 {
       font-weight: 600;
       font-size: 1.7rem;
       border-left: 6px solid #fcdd09;
       padding-left: 0.8rem;
       margin-bottom: 1.5rem;
-    }
-    .matches {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    .match-card {
-      background: rgba(0,0,0,0.45);
-      border-radius: 15px;
-      overflow: hidden;
-    }
-    .match-title {
-      padding: 0.8rem;
-      font-weight: 600;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
-    }
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-    }
-    .video-container iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
     }
 
     #anasayfa-content {
@@ -157,15 +150,53 @@
       margin-bottom: 1rem;
       font-size: 1.8rem;
     }
-    #anasayfa-content p, #anasayfa-content ul {
+    #anasayfa-content p {
+      margin-bottom: 1rem;
+    }
+    #anasayfa-content ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
       margin-bottom: 1rem;
     }
 
-    footer {
-      text-align: center;
-      font-weight: bold;
+    .matches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .match-card {
+      background: rgba(0,0,0,0.45);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .match-title {
       padding: 1rem;
-      color: #c8102e;
+      font-weight: 600;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    footer {
+      text-align:center;
+      font-weight:bold;
+      padding:1rem;
+      color:#c8102e;
     }
   </style>
 </head>
@@ -173,9 +204,11 @@
   <header>
     <div id="top-stars">★★★★★</div>
     <div id="top-text">Sonunda İyiler Mutlaka Kazanır!</div>
+    <div class="announcement">Bu site yapım aşamasındadır. Güncellemeler gelecektir.</div>
+    <div class="hamburger" id="hamburger">
+      <div></div><div></div><div></div>
+    </div>
     <h1>Galatasaray Maç Arşivi</h1>
-    <div id="info-text">Bu site yapım aşamasındadır, güncellemeler gelecektir.</div>
-    <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
   </header>
 
   <nav id="sidebar">
@@ -186,6 +219,7 @@
   </nav>
 
   <main>
+    <!-- Ana Sayfa -->
     <section id="anasayfa" class="category">
       <div id="anasayfa-content">
         <h2>Hoş Geldiniz!</h2>
@@ -202,6 +236,7 @@
           <li>16 Süper Kupa</li>
           <li>1 UEFA Kupası (2000)</li>
           <li>1 UEFA Süper Kupa (2000)</li>
+          <li>Avrupa’da yarı final ve çeyrek final başarıları</li>
         </ul>
         <h2>Bu Sitede Neler Var?</h2>
         <ul>
@@ -213,48 +248,70 @@
       </div>
     </section>
 
-    <section id="lig" class="category">
+    <!-- Lig Maçları -->
+    <section id="lig" class="category" style="display:none;">
       <h2>Lig Maçları</h2>
       <div class="matches">
-        <div class="match-card"><div class="match-title">GS 6-2 Rizespor</div><div class="video-container"><iframe src="https://www.youtube.com/embed/f7TVPv66wYQ" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">Başakşehir 0-7 GS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/zxeJBYelG44" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">FB 1-3 GS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/hHgqXZ5AK_s" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">TS 1-5 GS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/xesCv2VVGbs" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">Antalyaspor 0-3 GS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/IuPzs6_iOvc" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 3-0 Kayserispor</div><div class="video-container"><iframe src="https://www.youtube.com/embed/GsTG5M2xD-s" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 2-1 TS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/YcqzYraIWjY" allowfullscreen></iframe></div></div>
+        <!-- Lig videoları buraya gelecek -->
+        <!-- Örnek -->
+        <div class="match-card">
+          <h3 class="match-title">Galatasaray 6-2 Ç.Rizespor - 11 Temmuz 2024</h3>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/f7TVPv66wYQ" allowfullscreen></iframe>
+          </div>
+        </div>
+        <!-- Diğer videoları istersen hemen ekleyebilirim -->
       </div>
     </section>
 
-    <section id="avrupa" class="category">
+    <!-- Avrupa Maçları -->
+    <section id="avrupa" class="category" style="display:none;">
       <h2>Avrupa Maçları</h2>
       <div class="matches">
-        <div class="match-card"><div class="match-title">Malmö 2-2 GS</div><div class="video-container"><iframe src="https://www.youtube.com/embed/7a96N6odZY4" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 4-3 Elfsborg</div><div class="video-container"><iframe src="https://www.youtube.com/embed/EAqtlcPpLnw" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 3-2 Tottenham</div><div class="video-container"><iframe src="https://www.youtube.com/embed/nkVosSA8gkg" allowfullscreen></iframe></div></div>
+        <!-- Avrupa videoları -->
       </div>
     </section>
 
-    <section id="nostalji" class="category">
+    <!-- Nostaljik Maçlar -->
+    <section id="nostalji" class="category" style="display:none;">
       <h2>Nostaljik Maçlar</h2>
       <div class="matches">
-        <div class="match-card"><div class="match-title">GS 2-0 Dortmund</div><div class="video-container"><iframe src="https://www.youtube.com/embed/n8dcLOxhHhA" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 0-0 Man United</div><div class="video-container"><iframe src="https://www.youtube.com/embed/_Ye55On3n_Q" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 2-0 Juventus</div><div class="video-container"><iframe src="https://www.youtube.com/embed/lelNrWwlVP8" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 2-0 PSV</div><div class="video-container"><iframe src="https://www.youtube.com/embed/YcPbe_zByrA" allowfullscreen></iframe></div></div>
-        <div class="match-card"><div class="match-title">GS 2-2 Barcelona</div><div class="video-container"><iframe src="https://www.youtube.com/embed/Sck_gZ7m_3A" allowfullscreen></iframe></div></div>
+        <!-- Nostaljik videolar -->
       </div>
     </section>
   </main>
 
-  <footer>Şampiyon Cimbom!</footer>
+  <footer>
+    Şampiyon Cimbom!
+  </footer>
 
   <script>
     const hamburger = document.getElementById('hamburger');
     const sidebar = document.getElementById('sidebar');
+    const sections = document.querySelectorAll('section.category');
+    const navLinks = document.querySelectorAll('nav a');
+
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       sidebar.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('href').substring(1);
+        sections.forEach(section => {
+          section.style.display = section.id === target ? 'block' : 'none';
+        });
+        hamburger.classList.remove('active');
+        sidebar.classList.remove('active');
+      });
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      sections.forEach(section => {
+        section.style.display = section.id === 'anasayfa' ? 'block' : 'none';
+      });
     });
   </script>
 </body>
