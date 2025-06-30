@@ -18,27 +18,22 @@
       flex-direction: column;
       overflow-x: hidden;
     }
-
     header {
       background: rgba(0,0,0,0.6);
-      padding: 1rem 1.5rem 2.5rem;
+      padding: 1rem 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-      user-select: none;
       position: relative;
     }
-
     #top-stars {
       color: #fcdd09;
       font-size: 1.8rem;
       text-align: center;
       margin-bottom: 0.3rem;
       letter-spacing: 0.4rem;
-      line-height: 1;
     }
-
     #top-text {
       font-weight: 600;
       font-size: 1rem;
@@ -46,23 +41,12 @@
       text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
       margin-bottom: 0.8rem;
     }
-
-    .announcement {
-      background: #fcdd09;
-      color: #c8102e;
-      font-weight: bold;
-      padding: 0.7rem 1rem;
-      border-radius: 10px;
-      margin: 1rem 0;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
-
     header h1 {
       font-weight: 600;
       font-size: 1.8rem;
       letter-spacing: 2px;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+      margin-bottom: 1rem;
     }
 
     .hamburger {
@@ -120,10 +104,20 @@
       border-radius: 6px;
     }
 
+    .announcement {
+      background: #fcdd09;
+      color: #c8102e;
+      font-weight: bold;
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      margin-bottom: 1rem;
+    }
+
     main {
       flex-grow: 1;
       max-width: 1100px;
-      margin: 2rem auto 3rem;
+      margin: 2rem auto;
       padding: 0 1rem;
     }
 
@@ -138,31 +132,10 @@
       margin-bottom: 1.5rem;
     }
 
-    #anasayfa-content {
-      background: rgba(0,0,0,0.45);
-      border-radius: 15px;
-      padding: 2rem;
-      line-height: 1.6;
-    }
-    #anasayfa-content h2 {
-      border-left: 6px solid #fcdd09;
-      padding-left: 1rem;
-      margin-bottom: 1rem;
-      font-size: 1.8rem;
-    }
-    #anasayfa-content p {
-      margin-bottom: 1rem;
-    }
-    #anasayfa-content ul {
-      list-style-type: disc;
-      margin-left: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
     .matches {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      gap: 1.8rem;
     }
 
     .match-card {
@@ -192,6 +165,13 @@
       border: none;
     }
 
+    #anasayfa-content {
+      background: rgba(0,0,0,0.45);
+      border-radius: 15px;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
     footer {
       text-align:center;
       font-weight:bold;
@@ -201,118 +181,101 @@
   </style>
 </head>
 <body>
-  <header>
-    <div id="top-stars">★★★★★</div>
-    <div id="top-text">Sonunda İyiler Mutlaka Kazanır!</div>
-    <div class="announcement">Bu site yapım aşamasındadır. Güncellemeler gelecektir.</div>
-    <div class="hamburger" id="hamburger">
-      <div></div><div></div><div></div>
+
+<header>
+  <div id="top-stars">★★★★★</div>
+  <div id="top-text">Sonunda İyiler Mutlaka Kazanır!</div>
+  <div class="announcement">⚠️ Bu site yapım aşamasındadır. Güncellemeler gelecektir.</div>
+  <div class="hamburger" id="hamburger">
+    <div></div><div></div><div></div>
+  </div>
+  <h1>Galatasaray Maç Arşivi</h1>
+</header>
+
+<nav id="sidebar">
+  <a href="#anasayfa">Ana Sayfa</a>
+  <a href="#lig">Lig Maçları</a>
+  <a href="#avrupa">Avrupa Maçları</a>
+  <a href="#nostalji">Nostaljik Maçlar</a>
+</nav>
+
+<main>
+
+  <section id="anasayfa" class="category">
+    <div id="anasayfa-content">
+      <h2>Hoş Geldiniz!</h2>
+      <p>Galatasaray Maç Arşivi’ne hoş geldiniz! Burada Galatasaray’ın geçmişten günümüze en efsane maçlarını izleyebilir, başarılarına tanıklık edebilirsiniz.</p>
+      <p>Galatasaray Spor Kulübü, 1905 yılında Ali Sami Yen ve arkadaşları tarafından kurulmuş ve Türk futbolunun en köklü temsilcilerinden biri olmuştur.</p>
+      <p>Bu site, Galatasaray’ın tarihi başarılarını, unutulmaz maçlarını ve Avrupa’da yazdığı destanları bir araya getirerek taraftarlarla buluşturmak için hazırlandı.</p>
     </div>
-    <h1>Galatasaray Maç Arşivi</h1>
-  </header>
+  </section>
 
-  <nav id="sidebar">
-    <a href="#anasayfa">Ana Sayfa</a>
-    <a href="#lig">Lig Maçları</a>
-    <a href="#avrupa">Avrupa Maçları</a>
-    <a href="#nostalji">Nostaljik Maçlar</a>
-  </nav>
+  <section id="lig" class="category">
+    <h2>Lig Maçları</h2>
+    <div class="matches">
+      <div class="match-card"><h3 class="match-title">Galatasaray 6-2 Ç.Rizespor</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/f7TVPv66wYQ" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Başakşehir 0-7 Galatasaray</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/zxeJBYelG44" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Fenerbahçe 1-3 Galatasaray</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/hHgqXZ5AK_s" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Trabzonspor 1-5 Galatasaray</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/xesCv2VVGbs" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Antalyaspor 0-3 Galatasaray</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/IuPzs6_iOvc" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 3-0 Kayserispor</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/GsTG5M2xD-s" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 2-1 Trabzonspor</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/YcqzYraIWjY" allowfullscreen></iframe></div></div>
+    </div>
+  </section>
 
-  <main>
-    <!-- Ana Sayfa -->
-    <section id="anasayfa" class="category">
-      <div id="anasayfa-content">
-        <h2>Hoş Geldiniz!</h2>
-        <p>Galatasaray Maç Arşivi’ne hoş geldiniz! Burada Galatasaray’ın geçmişten günümüze en efsane maçlarını izleyebilir, başarılarına tanıklık edebilirsiniz.</p>
-        <p>Galatasaray Spor Kulübü, 1905 yılında Ali Sami Yen ve arkadaşları tarafından kurulmuş ve Türk futbolunun en köklü temsilcilerinden biri olmuştur.</p>
-        <p>Bu site, Galatasaray’ın tarihi başarılarını, unutulmaz maçlarını ve Avrupa’da yazdığı destanları bir araya getirerek taraftarlarla buluşturmak için hazırlandı.</p>
-        <h2>Galatasaray’ın Tarihçesi</h2>
-        <p>1905 yılında İstanbul'da kurulan Galatasaray, Türkiye'nin Avrupa kupası kazanan ilk ve tek takımıdır. UEFA Kupası'nı ve UEFA Süper Kupa’yı kazandığı 2000 yılı, kulüp tarihinin zirvesidir.</p>
-        <p>Türkiye'de birçok ilki başarmış, gerek altyapısı gerek yetiştirdiği yıldızlarla her dönem Türk futboluna yön vermiştir.</p>
-        <h2>Başarılar</h2>
-        <ul>
-          <li>22 Süper Lig Şampiyonluğu</li>
-          <li>18 Türkiye Kupası</li>
-          <li>16 Süper Kupa</li>
-          <li>1 UEFA Kupası (2000)</li>
-          <li>1 UEFA Süper Kupa (2000)</li>
-          <li>Avrupa’da yarı final ve çeyrek final başarıları</li>
-        </ul>
-        <h2>Bu Sitede Neler Var?</h2>
-        <ul>
-          <li>Lig Maçları: Süper Lig'de kazanılan önemli zaferler</li>
-          <li>Avrupa Maçları: UEFA ve Şampiyonlar Ligi'nde efsane anlar</li>
-          <li>Nostaljik Maçlar: 90’lar, 2000’ler ve unutulmayan tarihi maçlar</li>
-        </ul>
-        <p>Hazırsanız, Galatasaray’ın tarihine doğru bir yolculuğa çıkalım!</p>
-      </div>
-    </section>
+  <section id="avrupa" class="category">
+    <h2>Avrupa Maçları</h2>
+    <div class="matches">
+      <div class="match-card"><h3 class="match-title">Malmö 2-2 Galatasaray</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/7a96N6odZY4" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 4-3 Elfsborg</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/EAqtlcPpLnw" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 3-2 Tottenham</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/nkVosSA8gkg" allowfullscreen></iframe></div></div>
+    </div>
+  </section>
 
-    <!-- Lig Maçları -->
-    <section id="lig" class="category" style="display:none;">
-      <h2>Lig Maçları</h2>
-      <div class="matches">
-        <!-- Lig videoları buraya gelecek -->
-        <!-- Örnek -->
-        <div class="match-card">
-          <h3 class="match-title">Galatasaray 6-2 Ç.Rizespor - 11 Temmuz 2024</h3>
-          <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/f7TVPv66wYQ" allowfullscreen></iframe>
-          </div>
-        </div>
-        <!-- Diğer videoları istersen hemen ekleyebilirim -->
-      </div>
-    </section>
+  <section id="nostalji" class="category">
+    <h2>Nostaljik Maçlar</h2>
+    <div class="matches">
+      <div class="match-card"><h3 class="match-title">Galatasaray 2-0 Dortmund</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/n8dcLOxhHhA" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 0-0 Manchester United</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/_Ye55On3n_Q" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 2-0 Juventus</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/lelNrWwlVP8" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 2-0 PSV</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/YcPbe_zByrA" allowfullscreen></iframe></div></div>
+      <div class="match-card"><h3 class="match-title">Galatasaray 2-2 Barcelona</h3><div class="video-container"><iframe src="https://www.youtube.com/embed/Sck_gZ7m_3A" allowfullscreen></iframe></div></div>
+    </div>
+  </section>
 
-    <!-- Avrupa Maçları -->
-    <section id="avrupa" class="category" style="display:none;">
-      <h2>Avrupa Maçları</h2>
-      <div class="matches">
-        <!-- Avrupa videoları -->
-      </div>
-    </section>
+</main>
 
-    <!-- Nostaljik Maçlar -->
-    <section id="nostalji" class="category" style="display:none;">
-      <h2>Nostaljik Maçlar</h2>
-      <div class="matches">
-        <!-- Nostaljik videolar -->
-      </div>
-    </section>
-  </main>
+<footer>Şampiyon Cimbom!</footer>
 
-  <footer>
-    Şampiyon Cimbom!
-  </footer>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const sidebar = document.getElementById('sidebar');
+  const links = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('main section');
 
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const sidebar = document.getElementById('sidebar');
-    const sections = document.querySelectorAll('section.category');
-    const navLinks = document.querySelectorAll('nav a');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    sidebar.classList.toggle('active');
+  });
 
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      sidebar.classList.toggle('active');
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      sections.forEach(sec => sec.style.display = 'none');
+      target.style.display = 'block';
+      sidebar.classList.remove('active');
+      hamburger.classList.remove('active');
     });
+  });
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = link.getAttribute('href').substring(1);
-        sections.forEach(section => {
-          section.style.display = section.id === target ? 'block' : 'none';
-        });
-        hamburger.classList.remove('active');
-        sidebar.classList.remove('active');
-      });
+  // Sayfa yüklendiğinde sadece ana sayfa açık
+  window.addEventListener('DOMContentLoaded', () => {
+    sections.forEach(sec => {
+      if(sec.id !== "anasayfa") sec.style.display = 'none';
     });
+  });
+</script>
 
-    window.addEventListener('DOMContentLoaded', () => {
-      sections.forEach(section => {
-        section.style.display = section.id === 'anasayfa' ? 'block' : 'none';
-      });
-    });
-  </script>
 </body>
 </html>
