@@ -30,7 +30,6 @@
       position: relative;
     }
 
-    /* Üstte yıldız ve yazılar */
     #top-stars {
       color: #fcdd09;
       font-size: 1.8rem;
@@ -58,17 +57,19 @@
       margin-bottom: 0;
     }
 
+    /* Hamburger sağ üstte */
     .hamburger {
-      position: absolute;
+      position: fixed;
       top: 1rem;
-      left: 1.5rem;
+      right: 1.5rem;
       width: 30px;
       height: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 1100;
+      user-select: none;
     }
     .hamburger div {
       height: 4px;
@@ -86,9 +87,10 @@
       transform: rotate(-45deg) translate(5px, -5px);
     }
 
+    /* Sidebar Menü */
     nav {
       position: fixed;
-      top: 0; left: 0;
+      top: 0; right: 0;
       height: 100vh;
       width: 250px;
       background: rgba(0,0,0,0.85);
@@ -97,9 +99,9 @@
       display: flex;
       flex-direction: column;
       gap: 1.8rem;
-      transform: translateX(-260px);
+      transform: translateX(260px);
       transition: transform 0.3s ease;
-      z-index: 1000;
+      z-index: 1050;
       user-select: none;
     }
     nav.active {
@@ -126,10 +128,10 @@
       max-width: 1100px;
       margin: 2rem auto 3rem;
       padding: 0 1rem;
-      transition: margin-left 0.3s ease;
+      transition: margin-right 0.3s ease;
     }
     main.sidebar-open {
-      margin-left: 250px;
+      margin-right: 250px;
     }
 
     section.category {
@@ -218,20 +220,19 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Footer */
     footer {
       text-align:center;
       font-weight:bold;
       padding:1rem;
-      color:#c8102e; /* Kırmızı */
+      color:#c8102e;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       user-select: none;
     }
 
-    /* Responsive tweaks */
+    /* Responsive */
     @media (max-width: 768px) {
       main.sidebar-open {
-        margin-left: 0;
+        margin-right: 0;
       }
       nav {
         width: 200px;
@@ -244,14 +245,9 @@
       header {
         padding: 1rem 1rem 3rem;
       }
-    }
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.4rem;
-      }
       .hamburger {
         top: 1rem;
-        left: 1rem;
+        right: 1rem;
         width: 26px;
         height: 20px;
       }
@@ -262,6 +258,11 @@
         font-size: 1rem;
       }
     }
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -269,12 +270,11 @@
 <header>
   <div id="top-stars">★★★★★</div>
   <div id="top-text">Sonunda İyiler Mutlaka Kazanır!</div>
+  <h1>Galatasaray Maç Arşivi</h1>
 
   <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" role="button" tabindex="0">
     <div></div><div></div><div></div>
   </div>
-  
-  <h1>Galatasaray Maç Arşivi</h1>
 </header>
 
 <nav id="sidebar" aria-label="Site Kategorileri">
@@ -286,7 +286,6 @@
 
 <main id="mainContent">
 
-  <!-- Ana Sayfa -->
   <section id="anasayfa" class="category">
     <div id="anasayfa-content">
       <h2>Hoşgeldiniz!</h2>
@@ -303,11 +302,9 @@
     </div>
   </section>
 
-  <!-- Lig Maçları -->
   <section id="lig" class="category" style="display:none;">
     <h2>Lig Maçları</h2>
     <div class="matches">
-      <!-- Lig maçları videoları -->
       <div class="match-card">
         <h3 class="match-title">Galatasaray 6-2 Ç.Rizespor - 11 Temmuz 2024</h3>
         <div class="video-container">
@@ -353,11 +350,9 @@
     </div>
   </section>
 
-  <!-- Avrupa Maçları -->
   <section id="avrupa" class="category" style="display:none;">
     <h2>Avrupa Maçları</h2>
     <div class="matches">
-      <!-- Avrupa maçları videoları -->
       <div class="match-card">
         <h3 class="match-title">Malmö 2-2 Galatasaray - 12 Aralık 2024</h3>
         <div class="video-container">
@@ -379,11 +374,9 @@
     </div>
   </section>
 
-  <!-- Nostaljik Maçlar -->
   <section id="nostalji" class="category" style="display:none;">
     <h2>Nostaljik Maçlar</h2>
     <div class="matches">
-      <!-- Nostaljik maçlar videoları -->
       <div class="match-card">
         <h3 class="match-title">Galatasaray 2-0 Dortmund</h3>
         <div class="video-container">
@@ -430,10 +423,25 @@
   const links = document.querySelectorAll('nav a.nav-link');
   const sections = document.querySelectorAll('main section.category');
 
+  // Menü aç/kapa
   function toggleSidebar() {
     hamburger.classList.toggle('active');
     sidebar.classList.toggle('active');
     mainContent.classList.toggle('sidebar-open');
   }
   hamburger.addEventListener('click', toggleSidebar);
-  hamburger.addEventListener('keydown', (e) =>
+  hamburger.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleSidebar();
+    }
+  });
+
+  // Linklere tıklanınca ilgili kategori göster, menüyü kapa
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+
+      sections.forEach(section => {
+        section.style.display = section.id === targetId ? '
