@@ -30,7 +30,6 @@
       position: relative;
     }
 
-    /* Üstte yıldız ve yazılar */
     #top-stars {
       color: #fcdd09;
       font-size: 1.8rem;
@@ -191,7 +190,6 @@
       box-shadow: inset 0 0 30px rgba(252,221,9,0.8);
     }
 
-    /* Ana Sayfa İçeriği */
     #anasayfa-content {
       background: rgba(0,0,0,0.45);
       border-radius: 15px;
@@ -218,17 +216,15 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Footer */
     footer {
       text-align:center;
       font-weight:bold;
       padding:1rem;
-      color:#c8102e; /* Kırmızı */
+      color:#c8102e;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       user-select: none;
     }
 
-    /* Responsive tweaks */
     @media (max-width: 768px) {
       main.sidebar-open {
         margin-right: 0;
@@ -286,7 +282,6 @@
 
 <main id="mainContent">
 
-  <!-- Ana Sayfa -->
   <section id="anasayfa" class="category">
     <div id="anasayfa-content">
       <h2>Hoşgeldiniz!</h2>
@@ -305,7 +300,6 @@
     </div>
   </section>
 
-  <!-- Lig Maçları -->
   <section id="lig" class="category" style="display:none;">
     <h2>Lig Maçları</h2>
     <div class="matches">
@@ -354,7 +348,6 @@
     </div>
   </section>
 
-  <!-- Avrupa Maçları -->
   <section id="avrupa" class="category" style="display:none;">
     <h2>Avrupa Maçları</h2>
     <div class="matches">
@@ -379,7 +372,6 @@
     </div>
   </section>
 
-  <!-- Nostaljik Maçlar -->
   <section id="nostalji" class="category" style="display:none;">
     <h2>Nostaljik Maçlar</h2>
     <div class="matches">
@@ -429,6 +421,7 @@
   const links = document.querySelectorAll('nav a.nav-link');
   const sections = document.querySelectorAll('main section.category');
 
+  // Menü açıp kapama
   function toggleSidebar() {
     hamburger.classList.toggle('active');
     sidebar.classList.toggle('active');
@@ -442,6 +435,15 @@
     }
   });
 
+  // Linklere tıklayınca ilgili bölümü göster, menüyü kapat
   links.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      sections.forEach(sec => {
+        sec.style.display = (sec.id === targetId) ? 'block' : 'none';
+      });
+      // Menü açık ise kapat
+      if(sidebar.classList.contains('active')) {
+        toggleSidebar();
+      }
